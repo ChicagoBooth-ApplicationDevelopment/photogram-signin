@@ -21,8 +21,13 @@
     2 months ago
   </dd>
 
+  <% User.where({ :id => session.fetch(:user_id) }).at(0).username %>
+  <%#= @login_username %>
+
+  <% if User.where({ :id => session.fetch(:user_id) }).at(0).username == @photo.poster.username %>
   <dt>Edit photo</dt>
   <dd>
+
     <form action="/update_photo/<%= @photo.id %>">
       <label for="browser_image">Image</label>
       <input id="browser_image" type="text" name="input_image" placeholder="Enter a URL for the image..." value="<%= @photo.image %>">
@@ -33,6 +38,22 @@
       <button>Update photo</button>
     </form>
   </dd>
+  <% elsif %>
+
+    <%# <dt>Edit photo</dt> %>
+  <%# <dd> %>
+
+    <%# <form action="/update_photo/<%= @photo.id %>
+      <%# <label for="browser_image">Image</label> %>
+      <%# <input id="browser_image" type="hidden" name="input_image" placeholder="Enter a URL for the image..." value="<%= @photo.image %>
+
+      <%# <label for="browser_caption">Caption</label>
+      <textarea id="browser_caption" name="input_caption" placeholder="Enter a caption for the photo..."><%= @photo.caption %>
+
+      <%# <button>Update photo</button> %>
+    <%# </form> %>
+  <%# </dd> %>
+  <% end %>
 
   <dt>Delete photo</dt>
   <dd>
@@ -72,14 +93,16 @@
 <h3>Add a new comment</h3>
 
 <form action="/insert_comment_record" method="post">
-  <label for="browser_photo_id">Photo ID</label>
-  <input id="browser_photo_id" type="text" value="<%= @photo.id %>" name="input_photo_id">
+  <%# <label for="browser_photo_id">Photo ID</label> %>
+  <input id="browser_photo_id" type="hidden" value="<%= @photo.id %>" name="input_photo_id">
 
-  <label for="browser_author_id">Author ID</label>
-  <input id="browser_author_id" type="text" name="input_author_id">
+  <%# <label for="browser_author_id">Author ID</label>
+  <input id="browser_author_id" type="text" name="input_author_id"> %>
 
   <label for="browser_comment">Comment</label>
   <textarea id="browser_comment" name="input_body" placeholder="Enter a comment..."></textarea>
 
   <button>Add comment</button>
+
+
 </form>
